@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    static class ItemQualityManager
+    public static class ItemQualityManager
     {
 
         public static void UpdateQuality(IList<Item> items)
@@ -13,7 +13,7 @@ namespace GildedRose.Console
                 item.SellIn += sellInVelocity;
 
                 var qualityVelocity = GetQualityVelocity(item);
-                if (item.Quality > Constants.MinQuality && item.Quality < Constants.MaxQuality)
+                if (item.Quality >= Constants.MinQuality && item.Quality <= Constants.MaxQuality)
                 {
                     item.Quality += qualityVelocity;
                     if (item.Quality > Constants.MaxQuality)
@@ -45,45 +45,47 @@ namespace GildedRose.Console
 
         private static int GetQualityVelocity(Item item)
         {
+            int velocity;
             switch (item.Name)
             {
                 case Constants.Sulfuras:
                     {
-                        return 0;
+                        velocity = 0;
+                        break;
                     }
                 case Constants.AgedBrie:
                     {
-                        return 1;
+                        velocity = 1;
+                        break;
                     }
                 case Constants.ConjuredManaCake:
                     {
-                        return -2;
+                        velocity = -2;
+                        break;
                     }
                 case Constants.BackstagePass:
                     {
                         if (item.SellIn < 0)
-                        {
-                            return -item.Quality;
-                        }
-                        if (item.SellIn <= 5)
-                        {
-                            return 3;
-                        }
-                        if (item.SellIn <= 10)
-                        {
-                            return +2;
-                        }
-                        return +1;
+                            velocity = -item.Quality;
+                        else if (item.SellIn <= 5)
+                            velocity = 3;
+                        else if (item.SellIn <= 10)
+                            velocity = +2;
+                        else
+                            velocity = +1;
+                        break;
                     }
                 default:
                     {
-                        if (item.SellIn < 0)
-                        {
-                            return -2;
-                        }
-                        return -1;
+                        velocity = -1;
+                        break;
                     }
             }
+            if (item.SellIn < 0 && velocity < 0)
+            {
+                velocity *= 2;
+            }
+            return velocity;
         }
     }
 }
