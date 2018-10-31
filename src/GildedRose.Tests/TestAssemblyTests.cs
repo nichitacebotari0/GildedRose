@@ -5,12 +5,18 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class TestAssemblyTests
+    public class ItemQualityManagerTests
     {
+        private ItemQualityManager itemQualityManager;
+
+        public ItemQualityManagerTests()
+        {
+            itemQualityManager = new ItemQualityManager();
+        }
 
         [Theory]
-        [InlineData(1,6)]
-        [InlineData(-1,5)]
+        [InlineData(1, 6)]
+        [InlineData(-1, 5)]
         public void UpdateQuality_UpdateNormalItems_QualityDegrades(int currentSellIn, int expectedQuality)
         {
             // Arrange
@@ -21,16 +27,16 @@ namespace GildedRose.Tests
             };
 
             // Act
-            ItemQualityManager.UpdateQuality(items);
+            itemQualityManager.UpdateQuality(items);
 
             // Assert
             Assert.False(items.Any(x => x.Quality != expectedQuality));
-            Assert.False(items.Any(x => x.SellIn != currentSellIn-1));
+            Assert.False(items.Any(x => x.SellIn != currentSellIn - 1));
         }
 
         [Theory]
-        [InlineData(1,5)]
-        [InlineData(-1,3)]
+        [InlineData(1, 5)]
+        [InlineData(-1, 3)]
         public void ItemQualityManager_UpdateConjuredItems_QualityDegrades(int currentSellIn, int expectedQuality)
         {
             // Arrange
@@ -40,11 +46,11 @@ namespace GildedRose.Tests
             };
 
             // Act
-            ItemQualityManager.UpdateQuality(items);
+            itemQualityManager.UpdateQuality(items);
 
             // Assert
             Assert.False(items.Any(x => x.Quality != expectedQuality));
-            Assert.False(items.Any(x => x.SellIn != currentSellIn-1));
+            Assert.False(items.Any(x => x.SellIn != currentSellIn - 1));
         }
 
         [Fact]
@@ -55,7 +61,7 @@ namespace GildedRose.Tests
             var items = new List<Item>() { sulfuras };
 
             // Act
-            ItemQualityManager.UpdateQuality(items);
+            itemQualityManager.UpdateQuality(items);
 
             // Assert
             Assert.Equal(80, items.First(x => x.Name == sulfuras.Name).Quality);
@@ -63,8 +69,8 @@ namespace GildedRose.Tests
         }
 
         [Theory]
-        [InlineData(49,50)]
-        [InlineData(50,50)]
+        [InlineData(49, 50)]
+        [InlineData(50, 50)]
         public void ItemQualityManager_UpdateAgedBrie_IncreasesQuality(int currentQuality, int expectedQuality)
         {
             // Arrange
@@ -72,7 +78,7 @@ namespace GildedRose.Tests
             var items = new List<Item>() { agedBrie };
 
             // Act
-            ItemQualityManager.UpdateQuality(items);
+            itemQualityManager.UpdateQuality(items);
 
             // Assert
             Assert.Equal(expectedQuality, items.First(x => x.Name == agedBrie.Name).Quality);
@@ -91,7 +97,7 @@ namespace GildedRose.Tests
             var items = new List<Item>() { backstagePass };
 
             // Act
-            ItemQualityManager.UpdateQuality(items);
+            itemQualityManager.UpdateQuality(items);
 
             // Assert
             Assert.Equal(expectedQuality, items.First(x => x.Name == backstagePass.Name).Quality);

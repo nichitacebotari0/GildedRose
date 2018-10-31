@@ -2,10 +2,10 @@
 
 namespace GildedRose.Console
 {
-    public static class ItemQualityManager
+    public class ItemQualityManager : IItemQualityManager
     {
 
-        public static void UpdateQuality(IList<Item> items)
+        public void UpdateQuality(IList<Item> items)
         {
             foreach (var item in items)
             {
@@ -28,7 +28,7 @@ namespace GildedRose.Console
             }
         }
 
-        private static int GetSellInVelocity(string itemName)
+        private int GetSellInVelocity(string itemName)
         {
             switch (itemName)
             {
@@ -43,7 +43,7 @@ namespace GildedRose.Console
             }
         }
 
-        private static int GetQualityVelocity(Item item)
+        private int GetQualityVelocity(Item item)
         {
             int velocity;
             switch (item.Name)

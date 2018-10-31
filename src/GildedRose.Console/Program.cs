@@ -1,16 +1,27 @@
 ﻿using System.Collections.Generic;
+using GildedRose.Console.Repository;
+using SimpleInjector;
 
 namespace GildedRose.Console
 {
     static class Program
     {
+        static Container dependencyContainer;
         static IList<Item> Items;
+        static IItemJsonRepository itemRepo;
+        static IItemQualityService itemQualityService;
+
+        static Program()
+        {
+            dependencyContainer = DependencyBinder.Register();
+            itemRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
+            itemQualityService = dependencyContainer.GetInstance<IItemQualityService>();
+        }
         static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
-
-            Items = new List<Item>
+            Items = new List<Item>()
             {
                 new Item {Name = Constants.DexVestPlus5, SellIn = 10, Quality = 20},
                 new Item {Name = Constants.AgedBrie, SellIn = 2, Quality = 0},
@@ -20,7 +31,10 @@ namespace GildedRose.Console
                 new Item {Name = Constants.ConjuredManaCake, SellIn = 3, Quality = 6}
             };
 
-            ItemQualityManager.UpdateQuality(Items);
+            itemRepo.AddOrUpdate(Items);
+
+            itemQualityService.UpdateQuality();
+
 
             System.Console.ReadKey();
 
