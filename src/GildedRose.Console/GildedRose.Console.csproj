@@ -55,7 +55,7 @@
     <Compile Include="Repository\IItemJsonRepository.cs" />
     <Compile Include="Repository\IItemXMLRepository.cs" />
     <Compile Include="Repository\ItemJsonRepository.cs" />
-    <Compile Include="Repository\ItemRepositoryBase.cs" />
+    <Compile Include="Repository\base\ItemRepositoryBase.cs" />
     <Compile Include="Repository\ItemXMLRepository.cs" />
     <Compile Include="Services\IItemQualityManager.cs" />
     <Compile Include="Services\IItemQualityService.cs" />

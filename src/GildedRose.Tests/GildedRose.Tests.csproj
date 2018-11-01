@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="ItemJsonRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ItemQualityManager.cs" />
+    <Compile Include="ItemQualityManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GildedRose.Console.Repository
 {
-    public class ItemRepositoryBase
+    public abstract class ItemRepositoryBase
     {
         protected bool ShouldAddOrUpdate(Item inputItem, List<Item> contextItems)
         {
