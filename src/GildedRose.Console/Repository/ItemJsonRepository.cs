@@ -24,7 +24,7 @@ namespace GildedRose.Console.Repository
 
         public void AddOrUpdate(Item inputItem)
         {
-            var items = JsonConvert.DeserializeObject<List<Item>>(jsonPath);
+            var items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonPath));
             if (ShouldAddOrUpdate(inputItem, items))
             {
                 File.WriteAllText(jsonPath, JsonConvert.SerializeObject(items));
