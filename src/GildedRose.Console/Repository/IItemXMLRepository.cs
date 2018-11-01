@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console.Repository
 {
-    public interface IItemXMLRepository
+    public interface IItemXmlRepository
     {
         void AddOrUpdate(IEnumerable<Item> inputItems);
         void AddOrUpdate(Item item);

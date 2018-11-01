@@ -12,8 +12,10 @@ namespace GildedRose.Console
         {
             args = new string[] { @"C:\Workspace\itemsRepo" };
             Container dependencyContainer = DependencyBinder.Register(args[0]);
-            IItemJsonRepository itemRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
+            IItemJsonRepository jsonRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
+            IItemXmlRepository xmlRepo = dependencyContainer.GetInstance<IItemXmlRepository>();
             IItemQualityService itemQualityService = dependencyContainer.GetInstance<IItemQualityService>();
+
             System.Console.WriteLine("OMGHAI!");
 
             Items = new List<Item>()
@@ -26,8 +28,8 @@ namespace GildedRose.Console
                 new Item {Name = Constants.ConjuredManaCake, SellIn = 3, Quality = 6}
             };
 
-            itemRepo.AddOrUpdate(Items);
-
+            jsonRepo.AddOrUpdate(Items);
+            xmlRepo.AddOrUpdate(Items);
             itemQualityService.UpdateQuality();
 
 

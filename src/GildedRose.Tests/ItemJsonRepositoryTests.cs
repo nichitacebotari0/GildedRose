@@ -9,7 +9,7 @@ namespace GildedRose.Tests
     public class ItemJsonRepositoryTests : IDisposable
     {
         private ItemJsonRepository itemJsonRepo;
-        private string path = "C:\\Workspace\\JsonRepoTests.json";
+        private string path = "C:\\Workspace\\ItemRepoTests.json";
         public ItemJsonRepositoryTests()
         {
 
