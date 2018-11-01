@@ -6,19 +6,14 @@ namespace GildedRose.Console
 {
     static class Program
     {
-        static Container dependencyContainer;
         static IList<Item> Items;
-        static IItemJsonRepository itemRepo;
-        static IItemQualityService itemQualityService;
 
-        static Program()
-        {
-            dependencyContainer = DependencyBinder.Register();
-            itemRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
-            itemQualityService = dependencyContainer.GetInstance<IItemQualityService>();
-        }
         static void Main(string[] args)
         {
+            args = new string[] { @"C:\Workspace\itemsRepo" };
+            Container dependencyContainer = DependencyBinder.Register(args[0]);
+            IItemJsonRepository itemRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
+            IItemQualityService itemQualityService = dependencyContainer.GetInstance<IItemQualityService>();
             System.Console.WriteLine("OMGHAI!");
 
             Items = new List<Item>()

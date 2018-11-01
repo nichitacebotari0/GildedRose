@@ -5,13 +5,13 @@ namespace GildedRose.Console
 {
     public static class DependencyBinder
     {
-        public static Container Register()
+        public static Container Register(string path)
         {
             var container = new Container();
 
             container.Register<IItemQualityService, ItemQualityService>();
             container.Register<IItemQualityManager, ItemQualityManager>();
-            container.Register<IItemJsonRepository, ItemJsonRepository>();
+            container.Register<IItemJsonRepository>(() => new ItemJsonRepository($"{path}.json"));
 
             container.Verify();
             return container;

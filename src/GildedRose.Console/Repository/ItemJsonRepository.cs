@@ -9,9 +9,9 @@ namespace GildedRose.Console.Repository
     {
         private string jsonPath;
 
-        public ItemJsonRepository()
+        public ItemJsonRepository(string path)
         {
-            jsonPath = @"C:\Workspace\itemsRepo.json";
+            jsonPath = path;
             if (!File.Exists(jsonPath))
                 File.WriteAllText(jsonPath, "[]");
         }
