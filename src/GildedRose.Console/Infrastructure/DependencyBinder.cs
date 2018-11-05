@@ -18,11 +18,11 @@ namespace GildedRose.Console
             container.Register<IItemXmlRepository>(() => new ItemXmlRepository($"{path}.xml"));
             container.Register<IItemStrategyFactory>(() => new ItemStrategyFactory()
             {
-                { "Aged", () => container.GetInstance<AgedBrieStrategy>()},
-                { "Backstage", () => container.GetInstance<BackstagePassStrategy>()},
-                { "Conjured", () => container.GetInstance<ConjuredItemStrategy>()},
-                { "Legendary", () => container.GetInstance<SulfurasStrategy>()},
-                { "Default", () => container.GetInstance<DefaultItemStrategy>()}
+                { Constants.ItemType_Aged, () => container.GetInstance<AgedBrieStrategy>()},
+                { Constants.ItemType_Backstage, () => container.GetInstance<BackstagePassStrategy>()},
+                { Constants.ItemType_Conjured, () => container.GetInstance<ConjuredItemStrategy>()},
+                { Constants.ItemType_Legendary, () => container.GetInstance<SulfurasStrategy>()},
+                { Constants.ItemType_Default, () => container.GetInstance<DefaultItemStrategy>()}
             });
             container.Verify();
             return container;

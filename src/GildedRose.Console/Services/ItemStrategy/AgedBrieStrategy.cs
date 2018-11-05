@@ -2,11 +2,11 @@
 
 namespace GildedRose.Console.Services.ItemStrategy
 {
-    class AgedBrieStrategy : IItemQualityStrategy
+    public class AgedBrieStrategy : IItemQualityStrategy
     {
         public void UpdateItemQuality(Item item)
         {
-            item.Quality +=1;
+            item.Quality += 1;
             ItemConstraitns.LimitToMinMax(item);
         }
     }

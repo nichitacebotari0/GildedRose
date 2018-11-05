@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GildedRose.Console;
+using GildedRose.Console.Services.ItemStrategy;
 using Xunit;
 
 namespace GildedRose.Tests
@@ -8,28 +9,21 @@ namespace GildedRose.Tests
     public class ItemQualityManagerTests
     {
 
-        public ItemQualityManagerTests()
-        {
-            
-        }
-
         [Theory]
         [InlineData(1, 6)]
         [InlineData(-1, 5)]
-        public void UpdateQuality_UpdateNormalItems_QualityDegrades(int currentSellIn, int expectedQuality)
+        public void UpdateQuality_UpdateNormalItem_QualityDegrades(int currentSellIn, int expectedQuality)
         {
             // Arrange
-            var items = new List<Item>()
-            {
-            new Item {Name = Constants.DexVestPlus5, SellIn = currentSellIn, Quality = 7},
-            new Item {Name = Constants.MongooseElixir, SellIn = currentSellIn, Quality = 7}
-            };
+            var strategy = new DefaultItemStrategy();
+            var item = new Item { Name = Constants.DexVestPlus5, SellIn = currentSellIn, Quality = 7 };
+            new Item { Name = Constants.MongooseElixir, SellIn = currentSellIn, Quality = 7 };
 
             // Act
-            itemQualityManager.UpdateQuality(items);
+            strategy.UpdateItemQuality(item);
 
             // Assert
-            Assert.False(items.Any(x => x.Quality != expectedQuality));
+            Assert.True(item.Quality == expectedQuality);
         }
 
         [Theory]
@@ -38,31 +32,28 @@ namespace GildedRose.Tests
         public void ItemQualityManager_UpdateConjuredItems_QualityDegrades(int currentSellIn, int expectedQuality)
         {
             // Arrange
-            var items = new List<Item>()
-            {
-            new Item {Name = Constants.ConjuredManaCake, SellIn = currentSellIn, Quality = 7},
-            };
+            var strategy = new ConjuredItemStrategy();
+            var item = new Item { Name = Constants.ConjuredManaCake, SellIn = currentSellIn, Quality = 7 };
 
             // Act
-            itemQualityManager.UpdateQuality(items);
+            strategy.UpdateItemQuality(item);
 
             // Assert
-            Assert.False(items.Any(x => x.Quality != expectedQuality));
+            Assert.True(item.Quality == expectedQuality);
         }
 
         [Fact]
         public void ItemQualityManager_UpdateSulfuras_DoesntChange()
         {
             // Arrange
-            var sulfuras = new Item() { Name = Constants.Sulfuras, Quality = 80, SellIn = 0 };
-            var items = new List<Item>() { sulfuras };
+            var strategy = new SulfurasStrategy();
+            var item = new Item() { Name = Constants.Sulfuras, Quality = 80, SellIn = 0 };
 
             // Act
-            itemQualityManager.UpdateQuality(items);
+            strategy.UpdateItemQuality(item);
 
             // Assert
-            Assert.Equal(80, items.First(x => x.Name == sulfuras.Name).Quality);
-            Assert.Equal(0, items.First(x => x.Name == sulfuras.Name).SellIn);
+            Assert.Equal(80, item.Quality);
         }
 
         [Theory]
@@ -71,14 +62,15 @@ namespace GildedRose.Tests
         public void ItemQualityManager_UpdateAgedBrie_IncreasesQuality(int currentQuality, int expectedQuality)
         {
             // Arrange
-            var agedBrie = new Item { Name = Constants.AgedBrie, SellIn = 2, Quality = currentQuality };
-            var items = new List<Item>() { agedBrie };
+            var strategy = new AgedBrieStrategy();
+            var item = new Item { Name = Constants.AgedBrie, SellIn = 2, Quality = currentQuality };
+
 
             // Act
-            itemQualityManager.UpdateQuality(items);
+            strategy.UpdateItemQuality(item);
 
             // Assert
-            Assert.Equal(expectedQuality, items.First(x => x.Name == agedBrie.Name).Quality);
+            Assert.Equal(expectedQuality, item.Quality);
         }
 
         [Theory]
@@ -89,14 +81,14 @@ namespace GildedRose.Tests
         public void ItemQualityManager_UpdateBackStagePass_QualityChanges(int currentSellIn, int expectedQuality)
         {
             // Arrange
-            var backstagePass = new Item { Name = Constants.BackstagePass, SellIn = currentSellIn, Quality = 20 };
-            var items = new List<Item>() { backstagePass };
+            var strategy = new BackstagePassStrategy();
+            var item = new Item { Name = Constants.BackstagePass, SellIn = currentSellIn, Quality = 20 };
 
             // Act
-            itemQualityManager.UpdateQuality(items);
+            strategy.UpdateItemQuality(item);
 
             // Assert
-            Assert.Equal(expectedQuality, items.First(x => x.Name == backstagePass.Name).Quality);
+            Assert.Equal(expectedQuality, item.Quality);
         }
 
     }

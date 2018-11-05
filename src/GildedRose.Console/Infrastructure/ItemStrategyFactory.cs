@@ -13,27 +13,27 @@ namespace GildedRose.Console.Infrastructure
             {
                 case Constants.Sulfuras:
                     {
-                        itemType = "Legendary";
+                        itemType = Constants.ItemType_Legendary;
                         break;
                     }
                 case Constants.AgedBrie:
                     {
-                        itemType = "Aged";
+                        itemType = Constants.ItemType_Aged;
                         break;
                     }
                 case Constants.ConjuredManaCake:
                     {
-                        itemType = "Conjured";
+                        itemType = Constants.ItemType_Conjured;
                         break;
                     }
                 case Constants.BackstagePass:
                     {
-                        itemType = "Backstage";
+                        itemType = Constants.ItemType_Backstage;
                         break;
                     }
                 default:
                     {
-                        itemType = "Default";
+                        itemType = Constants.ItemType_Default;
                         break;
                     }
             }
