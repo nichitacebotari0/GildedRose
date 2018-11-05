@@ -1,8 +1,8 @@
 ﻿namespace GildedRose.Console.Infrastructure
 {
-    public static class ItemQualityRules
+    public static class ItemConstraitns
     {
-        public static void ApplyMinMaxRule(Item item)
+        public static void ResetMinMax(Item item)
         {
             if (item.Quality > Constants.MaxQuality)
             {

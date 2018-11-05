@@ -10,10 +10,7 @@ namespace GildedRose.Console
             foreach (var item in items)
             {
                 var qualityStrategy = GetQualityStrategy(item.Name);
-                if (item.Quality >= Constants.MinQuality && item.Quality <= Constants.MaxQuality)
-                {
                     qualityStrategy.UpdateItemQuality(item);
-                }
             }
         }
 

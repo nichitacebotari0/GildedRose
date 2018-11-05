@@ -10,7 +10,7 @@ namespace GildedRose.Console.Services.ItemStrategy
                 item.Quality += -1;
             else
                 item.Quality += -2;
-            ItemQualityRules.ApplyMinMaxRule(item);
+            ItemConstraitns.ResetMinMax(item);
         }
     }
 }
