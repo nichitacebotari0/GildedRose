@@ -7,11 +7,10 @@ namespace GildedRose.Tests
 {
     public class ItemQualityManagerTests
     {
-        private ItemQualityManager itemQualityManager;
 
         public ItemQualityManagerTests()
         {
-            itemQualityManager = new ItemQualityManager();
+            
         }
 
         [Theory]

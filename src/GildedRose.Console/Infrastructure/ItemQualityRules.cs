@@ -2,7 +2,7 @@
 {
     public static class ItemConstraitns
     {
-        public static void ResetMinMax(Item item)
+        public static void LimitToMinMax(Item item)
         {
             if (item.Quality > Constants.MaxQuality)
             {

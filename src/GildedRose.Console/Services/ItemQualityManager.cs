@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using GildedRose.Console.Infrastructure;
 using GildedRose.Console.Services.ItemStrategy;
 
 namespace GildedRose.Console
 {
     public class ItemQualityManager : IItemQualityManager
     {
+        IItemStrategyFactory itemStrategyFactory;
+        public ItemQualityManager(IItemStrategyFactory itemQualityStrategyFactory)
+        {
+            itemStrategyFactory = itemQualityStrategyFactory;
+        }
         public void UpdateQuality(IEnumerable<Item> items)
         {
             foreach (var item in items)
@@ -16,29 +22,7 @@ namespace GildedRose.Console
 
         private IItemQualityStrategy GetQualityStrategy(string itemName)
         {
-            switch (itemName)
-            {
-                case Constants.Sulfuras:
-                    {
-                        return new SulfurasStrategy();
-                    }
-                case Constants.AgedBrie:
-                    {
-                        return new AgedBrieStrategy();
-                    }
-                case Constants.ConjuredManaCake:
-                    {
-                        return new ConjuredItemStrategy();
-                    }
-                case Constants.BackstagePass:
-                    {
-                        return new BackstagePassStrategy();
-                    }
-                default:
-                    {
-                        return new DefaultItemStrategy();
-                    }
-            }
+            return itemStrategyFactory.CreateNew(itemName);
         }
     }
 }

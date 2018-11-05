@@ -49,7 +49,9 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DependencyBinder.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\IItemStrategyFactory.cs" />
     <Compile Include="Infrastructure\ItemQualityRules.cs" />
+    <Compile Include="Infrastructure\ItemStrategyFactory.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
