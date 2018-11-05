@@ -2,8 +2,8 @@
 
 namespace GildedRose.Console
 {
-    public interface IItemQualityService
+    public interface IItemUpdateService
     {
-        void UpdateQuality();
+        void UpdateItems();
     }
 }

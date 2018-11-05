@@ -58,9 +58,11 @@
     <Compile Include="Repository\base\ItemRepositoryBase.cs" />
     <Compile Include="Repository\ItemXmlRepository.cs" />
     <Compile Include="Services\IItemQualityManager.cs" />
-    <Compile Include="Services\IItemQualityService.cs" />
+    <Compile Include="Services\IItemSellInManager.cs" />
+    <Compile Include="Services\IItemUpdateService.cs" />
     <Compile Include="Services\ItemQualityManager.cs" />
-    <Compile Include="Services\ItemQualityService.cs" />
+    <Compile Include="Services\ItemUpdateService.cs" />
+    <Compile Include="Services\ItemSellInManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

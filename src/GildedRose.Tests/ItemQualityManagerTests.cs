@@ -31,7 +31,6 @@ namespace GildedRose.Tests
 
             // Assert
             Assert.False(items.Any(x => x.Quality != expectedQuality));
-            Assert.False(items.Any(x => x.SellIn != currentSellIn - 1));
         }
 
         [Theory]
@@ -50,7 +49,6 @@ namespace GildedRose.Tests
 
             // Assert
             Assert.False(items.Any(x => x.Quality != expectedQuality));
-            Assert.False(items.Any(x => x.SellIn != currentSellIn - 1));
         }
 
         [Fact]
@@ -82,7 +80,6 @@ namespace GildedRose.Tests
 
             // Assert
             Assert.Equal(expectedQuality, items.First(x => x.Name == agedBrie.Name).Quality);
-            Assert.Equal(1, items.First(x => x.Name == agedBrie.Name).SellIn);
         }
 
         [Theory]
@@ -101,7 +98,6 @@ namespace GildedRose.Tests
 
             // Assert
             Assert.Equal(expectedQuality, items.First(x => x.Name == backstagePass.Name).Quality);
-            Assert.Equal(currentSellIn - 1, items.First(x => x.Name == backstagePass.Name).SellIn);
         }
 
     }

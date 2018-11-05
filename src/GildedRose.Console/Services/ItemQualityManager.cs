@@ -8,9 +8,6 @@ namespace GildedRose.Console
         {
             foreach (var item in items)
             {
-                var sellInVelocity = GetSellInVelocity(item.Name);
-                item.SellIn += sellInVelocity;
-
                 var qualityVelocity = GetQualityVelocity(item);
                 if (item.Quality >= Constants.MinQuality && item.Quality <= Constants.MaxQuality)
                 {
@@ -24,21 +21,6 @@ namespace GildedRose.Console
                         item.Quality = Constants.MinQuality;
                     }
                 }
-            }
-        }
-
-        private int GetSellInVelocity(string itemName)
-        {
-            switch (itemName)
-            {
-                case Constants.Sulfuras:
-                    {
-                        return 0;
-                    }
-                default:
-                    {
-                        return -1;
-                    }
             }
         }
 

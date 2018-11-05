@@ -2,21 +2,24 @@
 
 namespace GildedRose.Console
 {
-    public class ItemQualityService : IItemQualityService
+    public class ItemUpdateService : IItemUpdateService
     {
         private IItemJsonRepository itemJsonRepo;
         private IItemXmlRepository itemXmlRepo;
         private IItemQualityManager itemQualityManager;
-        public ItemQualityService(IItemJsonRepository jsonRepo, IItemXmlRepository xmlRepo, IItemQualityManager qualityManager)
+        private IItemSellInManager itemSellInManager;
+        public ItemUpdateService(IItemJsonRepository jsonRepo, IItemXmlRepository xmlRepo, IItemQualityManager qualityManager, IItemSellInManager sellInManager)
         {
             itemJsonRepo = jsonRepo;
             itemXmlRepo = xmlRepo;
             itemQualityManager = qualityManager;
+            itemSellInManager = sellInManager;
         }
 
-        public void UpdateQuality()
+        public void UpdateItems()
         {
             var items = itemJsonRepo.GetAll();
+            itemSellInManager.UpdateSellIn(items);
             itemQualityManager.UpdateQuality(items);
             itemJsonRepo.AddOrUpdate(items);
 

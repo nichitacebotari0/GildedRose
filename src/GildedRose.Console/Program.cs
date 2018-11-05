@@ -14,7 +14,7 @@ namespace GildedRose.Console
             Container dependencyContainer = DependencyBinder.Register(args[0]);
             IItemJsonRepository jsonRepo = dependencyContainer.GetInstance<IItemJsonRepository>();
             IItemXmlRepository xmlRepo = dependencyContainer.GetInstance<IItemXmlRepository>();
-            IItemQualityService itemQualityService = dependencyContainer.GetInstance<IItemQualityService>();
+            IItemUpdateService itemUpdateService = dependencyContainer.GetInstance<IItemUpdateService>();
 
             System.Console.WriteLine("OMGHAI!");
 
@@ -30,7 +30,7 @@ namespace GildedRose.Console
 
             jsonRepo.AddOrUpdate(Items);
             xmlRepo.AddOrUpdate(Items);
-            itemQualityService.UpdateQuality();
+            itemUpdateService.UpdateItems();
 
 
             System.Console.ReadKey();

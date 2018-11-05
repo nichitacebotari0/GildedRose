@@ -9,7 +9,7 @@ namespace GildedRose.Console
         {
             var container = new Container();
 
-            container.Register<IItemQualityService, ItemQualityService>();
+            container.Register<IItemUpdateService, ItemUpdateService>();
             container.Register<IItemQualityManager, ItemQualityManager>();
             container.Register<IItemJsonRepository>(() => new ItemJsonRepository($"{path}.json"));
             container.Register<IItemXmlRepository>(() => new ItemXmlRepository($"{path}.xls"));
