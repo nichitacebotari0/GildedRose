@@ -25,6 +25,7 @@ namespace GildedRose.Console
 
 
             items = itemXmlRepo.GetAll();
+            itemSellInManager.UpdateSellIn(items);
             itemQualityManager.UpdateQuality(items);
             itemXmlRepo.AddOrUpdate(items);
         }

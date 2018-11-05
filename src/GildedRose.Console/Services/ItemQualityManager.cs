@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GildedRose.Console.Services.ItemStrategy;
 
 namespace GildedRose.Console
 {
@@ -8,65 +9,39 @@ namespace GildedRose.Console
         {
             foreach (var item in items)
             {
-                var qualityVelocity = GetQualityVelocity(item);
+                var qualityStrategy = GetQualityStrategy(item.Name);
                 if (item.Quality >= Constants.MinQuality && item.Quality <= Constants.MaxQuality)
                 {
-                    item.Quality += qualityVelocity;
-                    if (item.Quality > Constants.MaxQuality)
-                    {
-                        item.Quality = Constants.MaxQuality;
-                    }
-                    if (item.Quality < Constants.MinQuality)
-                    {
-                        item.Quality = Constants.MinQuality;
-                    }
+                    qualityStrategy.UpdateItemQuality(item);
                 }
             }
         }
 
-        private int GetQualityVelocity(Item item)
+        private IItemQualityStrategy GetQualityStrategy(string itemName)
         {
-            int velocity;
-            switch (item.Name)
+            switch (itemName)
             {
                 case Constants.Sulfuras:
                     {
-                        velocity = 0;
-                        break;
+                        return new SulfurasStrategy();
                     }
                 case Constants.AgedBrie:
                     {
-                        velocity = 1;
-                        break;
+                        return new AgedBrieStrategy();
                     }
                 case Constants.ConjuredManaCake:
                     {
-                        velocity = -2;
-                        break;
+                        return new ConjuredItemStrategy();
                     }
                 case Constants.BackstagePass:
                     {
-                        if (item.SellIn < 0)
-                            velocity = -item.Quality;
-                        else if (item.SellIn <= 5)
-                            velocity = 3;
-                        else if (item.SellIn <= 10)
-                            velocity = +2;
-                        else
-                            velocity = +1;
-                        break;
+                        return new BackstagePassStrategy();
                     }
                 default:
                     {
-                        velocity = -1;
-                        break;
+                        return new DefaultItemStrategy();
                     }
             }
-            if (item.SellIn < 0 && velocity < 0)
-            {
-                velocity *= 2;
-            }
-            return velocity;
         }
     }
 }

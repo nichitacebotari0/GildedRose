@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DependencyBinder.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\ItemQualityRules.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="Services\IItemSellInManager.cs" />
     <Compile Include="Services\IItemUpdateService.cs" />
     <Compile Include="Services\ItemQualityManager.cs" />
+    <Compile Include="Services\ItemStrategy\AgedBrieStrategy.cs" />
+    <Compile Include="Services\ItemStrategy\BackstagePassStrategy.cs" />
+    <Compile Include="Services\ItemStrategy\ConjuredItemStrategy.cs" />
+    <Compile Include="Services\ItemStrategy\DefaultItemStrategy.cs" />
+    <Compile Include="Services\ItemStrategy\IItemQualityStrategy.cs" />
+    <Compile Include="Services\ItemStrategy\SulfurasStrategy.cs" />
     <Compile Include="Services\ItemUpdateService.cs" />
     <Compile Include="Services\ItemSellInManager.cs" />
   </ItemGroup>
