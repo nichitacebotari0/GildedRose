@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using GildedRose.Console;
 using GildedRose.Console.Services.ItemStrategy;
 using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class ItemQualityManagerTests
+    public class ItemQualityStrategyTests
     {
 
         [Theory]
@@ -16,8 +14,10 @@ namespace GildedRose.Tests
         {
             // Arrange
             var strategy = new DefaultItemStrategy();
-            var item = new Item { Name = Constants.DexVestPlus5, SellIn = currentSellIn, Quality = 7 };
-            new Item { Name = Constants.MongooseElixir, SellIn = currentSellIn, Quality = 7 };
+            var item = new ItemBuilder(Constants.DexVestPlus5)
+                .WithQuality(7)
+                .WithSellIn(currentSellIn)
+                .Build();
 
             // Act
             strategy.UpdateItemQuality(item);
@@ -33,7 +33,10 @@ namespace GildedRose.Tests
         {
             // Arrange
             var strategy = new ConjuredItemStrategy();
-            var item = new Item { Name = Constants.ConjuredManaCake, SellIn = currentSellIn, Quality = 7 };
+            var item = new ItemBuilder(Constants.ConjuredManaCake)
+                .WithQuality(7)
+                .WithSellIn(currentSellIn)
+                .Build();
 
             // Act
             strategy.UpdateItemQuality(item);
@@ -47,7 +50,10 @@ namespace GildedRose.Tests
         {
             // Arrange
             var strategy = new SulfurasStrategy();
-            var item = new Item() { Name = Constants.Sulfuras, Quality = 80, SellIn = 0 };
+            var item = new ItemBuilder(Constants.Sulfuras)
+                .WithQuality(80)
+                .WithSellIn(0)
+                .Build();
 
             // Act
             strategy.UpdateItemQuality(item);
@@ -63,7 +69,10 @@ namespace GildedRose.Tests
         {
             // Arrange
             var strategy = new AgedBrieStrategy();
-            var item = new Item { Name = Constants.AgedBrie, SellIn = 2, Quality = currentQuality };
+            var item = new ItemBuilder(Constants.AgedBrie)
+                .WithQuality(currentQuality)
+                .WithSellIn(2)
+                .Build();
 
 
             // Act
@@ -82,7 +91,10 @@ namespace GildedRose.Tests
         {
             // Arrange
             var strategy = new BackstagePassStrategy();
-            var item = new Item { Name = Constants.BackstagePass, SellIn = currentSellIn, Quality = 20 };
+            var item = new ItemBuilder(Constants.BackstagePass)
+                .WithQuality(20)
+                .WithSellIn(currentSellIn)
+                .Build();
 
             // Act
             strategy.UpdateItemQuality(item);

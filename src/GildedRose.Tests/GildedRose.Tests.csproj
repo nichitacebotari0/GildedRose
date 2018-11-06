@@ -70,10 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemBuilder.cs" />
     <Compile Include="ItemJsonRepositoryTests.cs" />
     <Compile Include="ItemXmlRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ItemQualityManagerTests.cs" />
+    <Compile Include="ItemQualityStrategyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
