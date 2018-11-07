@@ -38,56 +38,81 @@ namespace GildedRose.Tests
 
             // Assert
             Assert.Equal(2, result.Count);
+        }
+
+        [Fact]
+        public void ItemJsonRepository_GetAllItems_QualityMapsCorrectly()
+        {
+            // Act
+            var result = itemJsonRepo.GetAll().ToList();
+
+            // Assert
             Assert.Equal(8, result.FirstOrDefault().Quality);
+        }
+
+        [Fact]
+        public void ItemJsonRepository_GetAllItems_SellInMapsCorrectly()
+        {
+            // Act
+            var result = itemJsonRepo.GetAll().ToList();
+
+            // Assert
             Assert.Equal(3, result.FirstOrDefault().SellIn);
         }
 
         [Fact]
-        public void ItemJsonRepository_UpdateItem_OnlyOneItemUpdated()
+        public void ItemJsonRepository_UpdateItem_FirstItemQualityUpdated()
         {
             // Arrange
-            var itemToUpdate = new Item()
-            {
-                Name = "Testitem",
-                Quality = 99,
-                SellIn = 99
-            };
+            var itemToUpdate = new ItemBuilder("Testitem")
+                .WithQuality(99)
+                .Build(); ;
+
             // Act
             itemJsonRepo.AddOrUpdate(itemToUpdate);
             var result = itemJsonRepo.GetAll().ToList();
 
             // Assert
-            Assert.Equal(2, result.Count);
             Assert.Equal(99, result.FirstOrDefault().Quality);
+        }
+
+        [Fact]
+        public void ItemJsonRepository_UpdateItem_OnlyFirstItemQualityUpdated()
+        {
+            // Arrange
+            var itemToUpdate = new ItemBuilder("Testitem")
+                .WithQuality(99)
+                .Build(); ;
+
+            // Act
+            itemJsonRepo.AddOrUpdate(itemToUpdate);
+            var result = itemJsonRepo.GetAll().ToList();
+
+            // Assert
             Assert.Equal(8, result.LastOrDefault().Quality);
         }
 
         [Fact]
-        public void ItemJsonRepository_UpdateItems_ItemsUpdated()
+        public void ItemJsonRepository_UpdateItems_ItemsQualityUpdated()
         {
             // Arrange
+            var itemBuilder = new ItemBuilder()
+                .WithQuality(99);
             var itemsToUpdate = new List<Item>() {
-                new Item()
-                {
-                    Name = "Testitem",
-                    Quality = 99,
-                    SellIn = 99
-                },
-                new Item()
-                {
-                    Name = "Testitem2",
-                    Quality = 45,
-                    SellIn = 45
-                }
+            itemBuilder
+                .WithName("Testitem")
+                .Build(),
+
+            itemBuilder
+                .WithName("Testitem2")
+                .Build()
             };
             // Act
             itemJsonRepo.AddOrUpdate(itemsToUpdate);
             var result = itemJsonRepo.GetAll().ToList();
 
             // Assert
-            Assert.Equal(2, result.Count);
-            Assert.Equal(99, result.FirstOrDefault().Quality);
-            Assert.Equal(45, result.LastOrDefault().Quality);
+            Assert.False(result.Any(x => x.Quality != 99));
         }
     }
 }

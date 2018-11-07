@@ -35,7 +35,12 @@ namespace GildedRose.Tests
 
         public Item Build()
         {
-            return item;
+            return new Item()
+            {
+                Name = item.Name,
+                Quality = item.Quality,
+                SellIn = item.SellIn
+            };
         }
     }
 }
