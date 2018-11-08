@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GildedRose.Console</RootNamespace>
     <AssemblyName>GildedRose.Console</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,6 +41,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GildedRoseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GildedRoseForm.Designer.cs">
+      <DependentUpon>GildedRoseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IItemUpdateView.cs" />
+    <Compile Include="Infrastructure\DataTableGenerator.cs" />
     <Compile Include="Infrastructure\DependencyBinder.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IItemStrategyFactory.cs" />
     <Compile Include="Infrastructure\ItemQualityRules.cs" />
     <Compile Include="Infrastructure\ItemStrategyFactory.cs" />
+    <Compile Include="ItemUpdatePresenter.cs" />
+    <Compile Include="ItemUpdateView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemUpdateView.Designer.cs">
+      <DependentUpon>ItemUpdateView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,7 +95,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="GildedRoseForm.resx">
+      <DependentUpon>GildedRoseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemUpdateView.resx">
+      <DependentUpon>ItemUpdateView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -24,6 +24,10 @@ namespace GildedRose.Console
                 { Constants.ItemType_Legendary, () => container.GetInstance<SulfurasStrategy>()},
                 { Constants.ItemType_Default, () => container.GetInstance<DefaultItemStrategy>()}
             });
+
+
+            container.Register<IItemUpdateView, ItemUpdateView>(Lifestyle.Singleton);
+
             container.Verify();
             return container;
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using GildedRose.Console.Repository;
 using SimpleInjector;
 
@@ -33,13 +34,12 @@ namespace GildedRose.Console
             itemUpdateService.UpdateItems();
 
 
-            System.Console.ReadKey();
+            //System.Console.ReadKey();
 
+            var mainForm = new GildedRoseForm();
+            var itemUpdatePresenter = new ItemUpdatePresenter(mainForm.ItemView ,jsonRepo, itemUpdateService);
+            
+            Application.Run(mainForm);
         }
-
-
     }
-
-
-
 }
